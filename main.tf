@@ -184,6 +184,11 @@ resource "aws_launch_template" "zookeeper" {
         Name = "${local.prefix}zookeeper-${count.index + 1}"
     })
   }
+  lifecycle {
+    ignore_changes = [
+      image_id,
+    ]
+  }
 }
 
 resource "aws_security_group" "zookeeper-internal" {
@@ -315,6 +320,12 @@ resource "aws_instance" "bastion" {
       Name = "${local.prefix}zookeeper-bastion"
     }
   )
+  
+  lifecycle {
+    ignore_changes = [
+      ami,
+    ]
+  }
 }
 
 resource "aws_route53_record" "zookeeper" {
