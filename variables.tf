@@ -93,6 +93,11 @@ variable "route53_zone" {
   type        = string
 }
 
+variable "assign_client_security_group" {
+  type        = bool
+  default     = false
+}
+
 variable "client_security_group_id" {
   description = "The security group id to grant access to the zookeeper nodes on port 2181"
   type        = string

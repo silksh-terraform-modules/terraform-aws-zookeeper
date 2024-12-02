@@ -232,7 +232,7 @@ resource "aws_security_group_rule" "zookeeper2" {
 }
 
 resource "aws_security_group_rule" "zookeeper-client-sg" {
-  count                    = var.client_security_group_id == "" ? 0 : 1
+  count                    = var.assign_client_security_group == true ? 0 : 1
   type                     = "ingress"
   from_port                = var.zookeeper_config["clientPort"]
   to_port                  = var.zookeeper_config["clientPort"]
@@ -242,7 +242,7 @@ resource "aws_security_group_rule" "zookeeper-client-sg" {
 }
 
 resource "aws_security_group_rule" "zookeeper-client-cidr" {
-  count             = var.client_security_group_id == "" ? 1 : 0
+  count             = var.assign_client_security_group == true ? 1 : 0
   type              = "ingress"
   from_port         = var.zookeeper_config["clientPort"]
   to_port           = var.zookeeper_config["clientPort"]
